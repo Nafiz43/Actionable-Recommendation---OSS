@@ -1,0 +1,8 @@
+    
+Comments from All-Hands Meeting:
+1. How to measure the amount of support for each of the ReACTs?
+2. How to add Governance into it?
+3. How can we measure the impact of the ReACTs in real OSS Projects
+
+
+Need to find different ways to show the graphsa

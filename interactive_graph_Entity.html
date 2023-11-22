@@ -1,0 +1,155 @@
+<html>
+    <head>
+        <meta charset="utf-8">
+        
+            <script src="lib/bindings/utils.js"></script>
+            <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/vis-network/9.1.2/dist/dist/vis-network.min.css" integrity="sha512-WgxfT5LWjfszlPHXRmBWHkV2eceiWTOBvrKCNbdgDYTHrT2AeLCGbF4sZlZw3UMN3WtL0tGUoIAKsu8mllg/XA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/vis-network/9.1.2/dist/vis-network.min.js" integrity="sha512-LnvoEWDFrqGHlHmDD2101OrLcbsfkrzoSpvtSQtxK3RMnRV0eOkhhBN2dXHKRrUU8p2DGRTk35n4O8nWSVe1mQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+            
+        
+<center>
+<h1></h1>
+</center>
+
+<!-- <link rel="stylesheet" href="../node_modules/vis/dist/vis.min.css" type="text/css" />
+<script type="text/javascript" src="../node_modules/vis/dist/vis.js"> </script>-->
+        <link
+          href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/css/bootstrap.min.css"
+          rel="stylesheet"
+          integrity="sha384-eOJMYsd53ii+scO/bJGFsiCZc+5NDVN2yr8+0RDqr0Ql0h+rP48ckxlpbzKgwra6"
+          crossorigin="anonymous"
+        />
+        <script
+          src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.bundle.min.js"
+          integrity="sha384-JEW9xMcG8R+pH31jmWH6WWP0WintQrMb4s7ZOdauHnUtxwoG2vI5DkLtS3qm9Ekf"
+          crossorigin="anonymous"
+        ></script>
+
+
+        <center>
+          <h1></h1>
+        </center>
+        <style type="text/css">
+
+             #mynetwork {
+                 width: 100%;
+                 height: 600px;
+                 background-color: #ffffff;
+                 border: 1px solid lightgray;
+                 position: relative;
+                 float: left;
+             }
+
+             
+
+             
+
+             
+        </style>
+    </head>
+
+
+    <body>
+        <div class="card" style="width: 100%">
+            
+            
+            <div id="mynetwork" class="card-body"></div>
+        </div>
+
+        
+        
+
+        <script type="text/javascript">
+
+              // initialize global variables.
+              var edges;
+              var nodes;
+              var allNodes;
+              var allEdges;
+              var nodeColors;
+              var originalNodes;
+              var network;
+              var container;
+              var options, data;
+              var filter = {
+                  item : '',
+                  property : '',
+                  value : []
+              };
+
+              
+
+              
+
+              // This method is responsible for drawing the graph, returns the drawn network
+              function drawGraph() {
+                  var container = document.getElementById('mynetwork');
+
+                  
+
+                  // parsing and collecting nodes and edges from the python
+                  nodes = new vis.DataSet([{"color": "#97c2fc", "id": "ReACT-3", "label": "ReACT-3", "shape": "dot", "title": "Use common programming language (PHP, JAVA, Javascript, Python, Ruby): The order of the programming languages are provided based on decreasing order of turnover rates by core developers"}, {"color": "#98BF64", "id": "Project Maintainers", "label": "Project Maintainers", "shape": "dot", "title": "\u003c\u003cDescription WIll Be Added\u003e\u003e"}, {"color": "#98BF64", "id": " Project Leaders", "label": " Project Leaders", "shape": "dot", "title": "\u003c\u003cDescription WIll Be Added\u003e\u003e"}, {"color": "#97c2fc", "id": "ReACT-1", "label": "ReACT-1", "shape": "dot", "title": "Maintaining a set of active/friendly developers"}, {"color": "#97c2fc", "id": "ReACT-6", "label": "ReACT-6", "shape": "dot", "title": "Maintaining Continuous Integration"}, {"color": "#98BF64", "id": "Project Leaders", "label": "Project Leaders", "shape": "dot", "title": "\u003c\u003cDescription WIll Be Added\u003e\u003e"}, {"color": "#98BF64", "id": " Core Developers", "label": " Core Developers", "shape": "dot", "title": "\u003c\u003cDescription WIll Be Added\u003e\u003e"}, {"color": "#97c2fc", "id": "ReACT-11", "label": "ReACT-11", "shape": "dot", "title": "Maintaining project small or simple"}, {"color": "#98BF64", "id": "Core Developers", "label": "Core Developers", "shape": "dot", "title": "\u003c\u003cDescription WIll Be Added\u003e\u003e"}, {"color": "#97c2fc", "id": "ReACT-34", "label": "ReACT-34", "shape": "dot", "title": "Keeping small number of core developers / (Higher the team size, higher the turnover of core developers)"}, {"color": "#98BF64", "id": " Technical Leads", "label": " Technical Leads", "shape": "dot", "title": "\u003c\u003cDescription WIll Be Added\u003e\u003e"}, {"color": "#98BF64", "id": " Community Managers", "label": " Community Managers", "shape": "dot", "title": "\u003c\u003cDescription WIll Be Added\u003e\u003e"}, {"color": "#97c2fc", "id": "ReACT-2", "label": "ReACT-2", "shape": "dot", "title": "Include the new members in the project, in which they had previous exposure"}, {"color": "#97c2fc", "id": "ReACT-4", "label": "ReACT-4", "shape": "dot", "title": "Use most common SE principles"}, {"color": "#97c2fc", "id": "ReACT-5", "label": "ReACT-5", "shape": "dot", "title": "Doing Pull based development"}, {"color": "#98BF64", "id": "Developers", "label": "Developers", "shape": "dot", "title": "\u003c\u003cDescription WIll Be Added\u003e\u003e"}, {"color": "#97c2fc", "id": "ReACT-7", "label": "ReACT-7", "shape": "dot", "title": "Maintaining Well designed Code"}, {"color": "#98BF64", "id": " Developers", "label": " Developers", "shape": "dot", "title": "\u003c\u003cDescription WIll Be Added\u003e\u003e"}, {"color": "#98BF64", "id": " Contributors", "label": " Contributors", "shape": "dot", "title": "\u003c\u003cDescription WIll Be Added\u003e\u003e"}, {"color": "#97c2fc", "id": "ReACT-8", "label": "ReACT-8", "shape": "dot", "title": "Doing Code Revision"}, {"color": "#98BF64", "id": "\n Contributors", "label": "\n Contributors", "shape": "dot", "title": "\u003c\u003cDescription WIll Be Added\u003e\u003e"}, {"color": "#97c2fc", "id": "ReACT-9", "label": "ReACT-9", "shape": "dot", "title": "Providing access of the main repository to the newcomer"}, {"color": "#97c2fc", "id": "ReACT-10", "label": "ReACT-10", "shape": "dot", "title": "Providing Job Support to the newcomer"}, {"color": "#98BF64", "id": "Project Managers", "label": "Project Managers", "shape": "dot", "title": "\u003c\u003cDescription WIll Be Added\u003e\u003e"}, {"color": "#98BF64", "id": " Owners", "label": " Owners", "shape": "dot", "title": "\u003c\u003cDescription WIll Be Added\u003e\u003e"}, {"color": "#97c2fc", "id": "ReACT-12", "label": "ReACT-12", "shape": "dot", "title": "Having Open Source Licence"}, {"color": "#98BF64", "id": "Sponsors", "label": "Sponsors", "shape": "dot", "title": "\u003c\u003cDescription WIll Be Added\u003e\u003e"}, {"color": "#97c2fc", "id": "ReACT-13", "label": "ReACT-13", "shape": "dot", "title": "Pay the contributor/Providing financial support"}, {"color": "#97c2fc", "id": "ReACT-14", "label": "ReACT-14", "shape": "dot", "title": "Working on a bug or issue together with mentee"}, {"color": "#98BF64", "id": "Mentors", "label": "Mentors", "shape": "dot", "title": "\u003c\u003cDescription WIll Be Added\u003e\u003e"}, {"color": "#98BF64", "id": " Senior Developers", "label": " Senior Developers", "shape": "dot", "title": "\u003c\u003cDescription WIll Be Added\u003e\u003e"}, {"color": "#97c2fc", "id": "ReACT-15", "label": "ReACT-15", "shape": "dot", "title": "Holding training sessions for newcomers"}, {"color": "#98BF64", "id": " Project Maintainers", "label": " Project Maintainers", "shape": "dot", "title": "\u003c\u003cDescription WIll Be Added\u003e\u003e"}, {"color": "#97c2fc", "id": "ReACT-16", "label": "ReACT-16", "shape": "dot", "title": "Flagging newcomers so others are welcoming to them"}, {"color": "#98BF64", "id": "Community Moderators", "label": "Community Moderators", "shape": "dot", "title": "\u003c\u003cDescription WIll Be Added\u003e\u003e"}, {"color": "#97c2fc", "id": "ReACT-17", "label": "ReACT-17", "shape": "dot", "title": "Communication through different means"}, {"color": "#98BF64", "id": "Community Managers", "label": "Community Managers", "shape": "dot", "title": "\u003c\u003cDescription WIll Be Added\u003e\u003e"}, {"color": "#97c2fc", "id": "ReACT-18", "label": "ReACT-18", "shape": "dot", "title": "Giving the newcomers small/ interesting tasks"}, {"color": "#97c2fc", "id": "ReACT-19", "label": "ReACT-19", "shape": "dot", "title": "Giving newcomers rewards to keep them motivated"}, {"color": "#98BF64", "id": " Sponsors", "label": " Sponsors", "shape": "dot", "title": "\u003c\u003cDescription WIll Be Added\u003e\u003e"}, {"color": "#97c2fc", "id": "ReACT-20", "label": "ReACT-20", "shape": "dot", "title": "Having newcomers share their work to have more exposure"}, {"color": "#97c2fc", "id": "ReACT-21", "label": "ReACT-21", "shape": "dot", "title": "Tagging the tasks according to their complexity"}, {"color": "#97c2fc", "id": "ReACT-22", "label": "ReACT-22", "shape": "dot", "title": "Having local groups in each country"}, {"color": "#97c2fc", "id": "ReACT-23", "label": "ReACT-23", "shape": "dot", "title": "Keeping documentation concise and updated"}, {"color": "#98BF64", "id": " Documentation Team", "label": " Documentation Team", "shape": "dot", "title": "\u003c\u003cDescription WIll Be Added\u003e\u003e"}, {"color": "#97c2fc", "id": "ReACT-24", "label": "ReACT-24", "shape": "dot", "title": "Doing Unit test"}, {"color": "#98BF64", "id": " Quality Assurance Team", "label": " Quality Assurance Team", "shape": "dot", "title": "\u003c\u003cDescription WIll Be Added\u003e\u003e"}, {"color": "#97c2fc", "id": "ReACT-25", "label": "ReACT-25", "shape": "dot", "title": "Keeping documentation for the code"}, {"color": "#98BF64", "id": "Contributors", "label": "Contributors", "shape": "dot", "title": "\u003c\u003cDescription WIll Be Added\u003e\u003e"}, {"color": "#97c2fc", "id": "ReACT-26", "label": "ReACT-26", "shape": "dot", "title": "Keeping well structured design"}, {"color": "#98BF64", "id": "Architects", "label": "Architects", "shape": "dot", "title": "\u003c\u003cDescription WIll Be Added\u003e\u003e"}, {"color": "#98BF64", "id": " Design Team", "label": " Design Team", "shape": "dot", "title": "\u003c\u003cDescription WIll Be Added\u003e\u003e"}, {"color": "#97c2fc", "id": "ReACT-27", "label": "ReACT-27", "shape": "dot", "title": "Doing frequent code reviews"}, {"color": "#98BF64", "id": " Peer Reviewers", "label": " Peer Reviewers", "shape": "dot", "title": "\u003c\u003cDescription WIll Be Added\u003e\u003e"}, {"color": "#97c2fc", "id": "ReACT-28", "label": "ReACT-28", "shape": "dot", "title": "Having open source license"}, {"color": "#97c2fc", "id": "ReACT-29", "label": "ReACT-29", "shape": "dot", "title": "Providing coding guidelines"}, {"color": "#97c2fc", "id": "ReACT-30", "label": "ReACT-30", "shape": "dot", "title": "Promoting code transparency"}, {"color": "#97c2fc", "id": "ReACT-31", "label": "ReACT-31", "shape": "dot", "title": "Provide contribution guidelines"}, {"color": "#97c2fc", "id": "ReACT-32", "label": "ReACT-32", "shape": "dot", "title": "Keeping a set of available project leaders"}, {"color": "#97c2fc", "id": "ReACT-33", "label": "ReACT-33", "shape": "dot", "title": "Maintaining an open and meritocratic culture"}, {"color": "#97c2fc", "id": "ReACT-35", "label": "ReACT-35", "shape": "dot", "title": "Having less conflicts among developers"}, {"color": "#97c2fc", "id": "ReACT-36", "label": "ReACT-36", "shape": "dot", "title": "Having experienced Contributors"}, {"color": "#97c2fc", "id": "ReACT-37", "label": "ReACT-37", "shape": "dot", "title": "Keeping shared repository: the pairs should access and manipulate files from the same repository"}, {"color": "#98BF64", "id": " Collaboration Coordinators", "label": " Collaboration Coordinators", "shape": "dot", "title": "\u003c\u003cDescription WIll Be Added\u003e\u003e"}, {"color": "#97c2fc", "id": "ReACT-38", "label": "ReACT-38", "shape": "dot", "title": "Use a distributed pair programming tool that support the roles between the pairs:"}, {"color": "#97c2fc", "id": "ReACT-39", "label": "ReACT-39", "shape": "dot", "title": "Make developers use tool that supports synchronous editing of source code"}, {"color": "#97c2fc", "id": "ReACT-40", "label": "ReACT-40", "shape": "dot", "title": "Use a system that support the options of compiling and executing the source code being edited and should notify the users of the error messages reported by the compiler"}, {"color": "#97c2fc", "id": "ReACT-41", "label": "ReACT-41", "shape": "dot", "title": "The source code files to be shared should be stored in Web repositories to ensure that documents are available to all members of the development team."}, {"color": "#97c2fc", "id": "ReACT-42", "label": "ReACT-42", "shape": "dot", "title": "Access to documents being edited should be controlled at the repository. Mechanisms to request and obtain shared resources need to be provided"}, {"color": "#97c2fc", "id": "ReACT-43", "label": "ReACT-43", "shape": "dot", "title": "Use a communication channel that supports text and audio-based communication"}, {"color": "#97c2fc", "id": "ReACT-44", "label": "ReACT-44", "shape": "dot", "title": "Couple people with comparable experience and capabilities;"}, {"color": "#97c2fc", "id": "ReACT-45", "label": "ReACT-45", "shape": "dot", "title": "Plan frequent brainstorming sessions in order to create a common vision of the project"}, {"color": "#97c2fc", "id": "ReACT-46", "label": "ReACT-46", "shape": "dot", "title": "make a group of developers to work together in multiple projects"}, {"color": "#97c2fc", "id": "ReACT-47", "label": "ReACT-47", "shape": "dot", "title": "Have the project owned by users, rather than organization (project owned by organization have higher core developer turnover rate)"}, {"color": "#97c2fc", "id": "ReACT-48", "label": "ReACT-48", "shape": "dot", "title": "Plan to finish the project in a shorter amount of time. (Core Developers Turnover rate increases as the project ages)"}, {"color": "#97c2fc", "id": "ReACT-49", "label": "ReACT-49", "shape": "dot", "title": "Incorporating inclusive pronouns in communication. (reference to the team using an inclusive pronoun. If we\nsee \u201cwe\u201d or \u201cus\u201d or \u201cour\u201d, and it refers to the group,\nthen it is Inclusive Reference. Not if \u201cwe\u201d or \u201cus\u201d or\n\u201cour\u201d refer to another group that the speaker is a\nmember of)"}]);
+                  edges = new vis.DataSet([{"arrows": "to", "color": "#32612D", "from": "Project Maintainers", "to": "ReACT-3"}, {"arrows": "to", "color": "#32612D", "from": " Project Leaders", "to": "ReACT-3"}, {"arrows": "to", "color": "#32612D", "from": "Project Maintainers", "to": "ReACT-1"}, {"arrows": "to", "color": "#32612D", "from": " Project Leaders", "to": "ReACT-1"}, {"arrows": "to", "color": "#32612D", "from": "Project Leaders", "to": "ReACT-6"}, {"arrows": "to", "color": "#32612D", "from": " Core Developers", "to": "ReACT-6"}, {"arrows": "to", "color": "#32612D", "from": "Core Developers", "to": "ReACT-11"}, {"arrows": "to", "color": "#32612D", "from": "Project Maintainers", "to": "ReACT-34"}, {"arrows": "to", "color": "#32612D", "from": " Technical Leads", "to": "ReACT-34"}, {"arrows": "to", "color": "#32612D", "from": " Community Managers", "to": "ReACT-34"}, {"arrows": "to", "color": "#32612D", "from": "Project Maintainers", "to": "ReACT-2"}, {"arrows": "to", "color": "#32612D", "from": " Project Leaders", "to": "ReACT-2"}, {"arrows": "to", "color": "#32612D", "from": "Project Maintainers", "to": "ReACT-4"}, {"arrows": "to", "color": "#32612D", "from": " Project Leaders", "to": "ReACT-4"}, {"arrows": "to", "color": "#32612D", "from": "Developers", "to": "ReACT-5"}, {"arrows": "to", "color": "#32612D", "from": "Project Leaders", "to": "ReACT-7"}, {"arrows": "to", "color": "#32612D", "from": " Developers", "to": "ReACT-7"}, {"arrows": "to", "color": "#32612D", "from": " Contributors", "to": "ReACT-7"}, {"arrows": "to", "color": "#32612D", "from": "Project Leaders", "to": "ReACT-8"}, {"arrows": "to", "color": "#32612D", "from": " Core Developers", "to": "ReACT-8"}, {"arrows": "to", "color": "#32612D", "from": "\n Contributors", "to": "ReACT-8"}, {"arrows": "to", "color": "#32612D", "from": "Project Leaders", "to": "ReACT-9"}, {"arrows": "to", "color": "#32612D", "from": "Project Managers", "to": "ReACT-10"}, {"arrows": "to", "color": "#32612D", "from": " Owners", "to": "ReACT-10"}, {"arrows": "to", "color": "#32612D", "from": "Sponsors", "to": "ReACT-12"}, {"arrows": "to", "color": "#32612D", "from": "Sponsors", "to": "ReACT-13"}, {"arrows": "to", "color": "#32612D", "from": "Mentors", "to": "ReACT-14"}, {"arrows": "to", "color": "#32612D", "from": " Senior Developers", "to": "ReACT-14"}, {"arrows": "to", "color": "#32612D", "from": "Mentors", "to": "ReACT-15"}, {"arrows": "to", "color": "#32612D", "from": " Project Maintainers", "to": "ReACT-15"}, {"arrows": "to", "color": "#32612D", "from": " Project Leaders", "to": "ReACT-15"}, {"arrows": "to", "color": "#32612D", "from": "Community Moderators", "to": "ReACT-16"}, {"arrows": "to", "color": "#32612D", "from": " Project Maintainers", "to": "ReACT-16"}, {"arrows": "to", "color": "#32612D", "from": " Project Leaders", "to": "ReACT-16"}, {"arrows": "to", "color": "#32612D", "from": "Community Managers", "to": "ReACT-17"}, {"arrows": "to", "color": "#32612D", "from": " Project Maintainers", "to": "ReACT-17"}, {"arrows": "to", "color": "#32612D", "from": " Project Leaders", "to": "ReACT-17"}, {"arrows": "to", "color": "#32612D", "from": "Mentors", "to": "ReACT-18"}, {"arrows": "to", "color": "#32612D", "from": " Project Maintainers", "to": "ReACT-18"}, {"arrows": "to", "color": "#32612D", "from": " Project Leaders", "to": "ReACT-18"}, {"arrows": "to", "color": "#32612D", "from": "Community Managers", "to": "ReACT-19"}, {"arrows": "to", "color": "#32612D", "from": " Project Maintainers", "to": "ReACT-19"}, {"arrows": "to", "color": "#32612D", "from": " Project Leaders", "to": "ReACT-19"}, {"arrows": "to", "color": "#32612D", "from": " Sponsors", "to": "ReACT-19"}, {"arrows": "to", "color": "#32612D", "from": "Community Managers", "to": "ReACT-20"}, {"arrows": "to", "color": "#32612D", "from": " Project Maintainers", "to": "ReACT-20"}, {"arrows": "to", "color": "#32612D", "from": " Project Leaders", "to": "ReACT-20"}, {"arrows": "to", "color": "#32612D", "from": "Project Maintainers", "to": "ReACT-21"}, {"arrows": "to", "color": "#32612D", "from": " Developers", "to": "ReACT-21"}, {"arrows": "to", "color": "#32612D", "from": "Community Managers", "to": "ReACT-22"}, {"arrows": "to", "color": "#32612D", "from": "Project Maintainers", "to": "ReACT-23"}, {"arrows": "to", "color": "#32612D", "from": " Documentation Team", "to": "ReACT-23"}, {"arrows": "to", "color": "#32612D", "from": " Contributors", "to": "ReACT-23"}, {"arrows": "to", "color": "#32612D", "from": "Developers", "to": "ReACT-24"}, {"arrows": "to", "color": "#32612D", "from": " Quality Assurance Team", "to": "ReACT-24"}, {"arrows": "to", "color": "#32612D", "from": " Contributors", "to": "ReACT-24"}, {"arrows": "to", "color": "#32612D", "from": "Contributors", "to": "ReACT-25"}, {"arrows": "to", "color": "#32612D", "from": " Developers", "to": "ReACT-25"}, {"arrows": "to", "color": "#32612D", "from": "Architects", "to": "ReACT-26"}, {"arrows": "to", "color": "#32612D", "from": " Design Team", "to": "ReACT-26"}, {"arrows": "to", "color": "#32612D", "from": " Developers", "to": "ReACT-26"}, {"arrows": "to", "color": "#32612D", "from": "Developers", "to": "ReACT-27"}, {"arrows": "to", "color": "#32612D", "from": " Peer Reviewers", "to": "ReACT-27"}, {"arrows": "to", "color": "#32612D", "from": " Project Maintainers", "to": "ReACT-27"}, {"arrows": "to", "color": "#32612D", "from": "Project Maintainers", "to": "ReACT-28"}, {"arrows": "to", "color": "#32612D", "from": " Contributors", "to": "ReACT-28"}, {"arrows": "to", "color": "#32612D", "from": "Developers", "to": "ReACT-29"}, {"arrows": "to", "color": "#32612D", "from": " Technical Leads", "to": "ReACT-29"}, {"arrows": "to", "color": "#32612D", "from": " Project Maintainers", "to": "ReACT-29"}, {"arrows": "to", "color": "#32612D", "from": "Project Maintainers", "to": "ReACT-30"}, {"arrows": "to", "color": "#32612D", "from": " Community Managers", "to": "ReACT-30"}, {"arrows": "to", "color": "#32612D", "from": " Developers", "to": "ReACT-30"}, {"arrows": "to", "color": "#32612D", "from": "Project Maintainers", "to": "ReACT-31"}, {"arrows": "to", "color": "#32612D", "from": " Community Managers", "to": "ReACT-31"}, {"arrows": "to", "color": "#32612D", "from": " Contributors", "to": "ReACT-31"}, {"arrows": "to", "color": "#32612D", "from": "Project Maintainers", "to": "ReACT-32"}, {"arrows": "to", "color": "#32612D", "from": "Project Maintainers", "to": "ReACT-33"}, {"arrows": "to", "color": "#32612D", "from": " Community Managers", "to": "ReACT-33"}, {"arrows": "to", "color": "#32612D", "from": " Project Leaders", "to": "ReACT-33"}, {"arrows": "to", "color": "#32612D", "from": "Project Maintainers", "to": "ReACT-35"}, {"arrows": "to", "color": "#32612D", "from": " Project Leaders", "to": "ReACT-35"}, {"arrows": "to", "color": "#32612D", "from": "Project Maintainers", "to": "ReACT-36"}, {"arrows": "to", "color": "#32612D", "from": " Community Managers", "to": "ReACT-36"}, {"arrows": "to", "color": "#32612D", "from": "Project Maintainers", "to": "ReACT-37"}, {"arrows": "to", "color": "#32612D", "from": " Collaboration Coordinators", "to": "ReACT-37"}, {"arrows": "to", "color": "#32612D", "from": "Project Maintainers", "to": "ReACT-38"}, {"arrows": "to", "color": "#32612D", "from": " Collaboration Coordinators", "to": "ReACT-38"}, {"arrows": "to", "color": "#32612D", "from": "Project Maintainers", "to": "ReACT-39"}, {"arrows": "to", "color": "#32612D", "from": " Collaboration Coordinators", "to": "ReACT-39"}, {"arrows": "to", "color": "#32612D", "from": "Project Maintainers", "to": "ReACT-40"}, {"arrows": "to", "color": "#32612D", "from": " Collaboration Coordinators", "to": "ReACT-40"}, {"arrows": "to", "color": "#32612D", "from": "Project Maintainers", "to": "ReACT-41"}, {"arrows": "to", "color": "#32612D", "from": " Collaboration Coordinators", "to": "ReACT-41"}, {"arrows": "to", "color": "#32612D", "from": "Project Maintainers", "to": "ReACT-42"}, {"arrows": "to", "color": "#32612D", "from": " Collaboration Coordinators", "to": "ReACT-42"}, {"arrows": "to", "color": "#32612D", "from": " Project Leaders", "to": "ReACT-42"}, {"arrows": "to", "color": "#32612D", "from": "Community Managers", "to": "ReACT-43"}, {"arrows": "to", "color": "#32612D", "from": " Project Maintainers", "to": "ReACT-43"}, {"arrows": "to", "color": "#32612D", "from": "Project Managers", "to": "ReACT-44"}, {"arrows": "to", "color": "#32612D", "from": " Project Leaders", "to": "ReACT-44"}, {"arrows": "to", "color": "#32612D", "from": "Project Managers", "to": "ReACT-45"}, {"arrows": "to", "color": "#32612D", "from": " Project Leaders", "to": "ReACT-45"}, {"arrows": "to", "color": "#32612D", "from": "Project Managers", "to": "ReACT-46"}, {"arrows": "to", "color": "#32612D", "from": " Project Leaders", "to": "ReACT-46"}, {"arrows": "to", "color": "#32612D", "from": " Community Managers", "to": "ReACT-46"}, {"arrows": "to", "color": "#32612D", "from": "Project Maintainers", "to": "ReACT-47"}, {"arrows": "to", "color": "#32612D", "from": "Project Managers", "to": "ReACT-48"}, {"arrows": "to", "color": "#32612D", "from": " Project Leaders", "to": "ReACT-48"}, {"arrows": "to", "color": "#32612D", "from": " Developers", "to": "ReACT-48"}, {"arrows": "to", "color": "#32612D", "from": "Contributors", "to": "ReACT-49"}, {"arrows": "to", "color": "#32612D", "from": " Community Managers", "to": "ReACT-49"}, {"arrows": "to", "color": "#32612D", "from": " Project Maintainers", "to": "ReACT-49"}]);
+
+                  nodeColors = {};
+                  allNodes = nodes.get({ returnType: "Object" });
+                  for (nodeId in allNodes) {
+                    nodeColors[nodeId] = allNodes[nodeId].color;
+                  }
+                  allEdges = edges.get({ returnType: "Object" });
+                  // adding nodes and edges to the graph
+                  data = {nodes: nodes, edges: edges};
+
+                  var options = {
+    "configure": {
+        "enabled": false
+    },
+    "edges": {
+        "color": {
+            "inherit": true
+        },
+        "smooth": {
+            "enabled": true,
+            "type": "dynamic"
+        }
+    },
+    "interaction": {
+        "dragNodes": true,
+        "hideEdgesOnDrag": false,
+        "hideNodesOnDrag": false
+    },
+    "physics": {
+        "enabled": true,
+        "stabilization": {
+            "enabled": true,
+            "fit": true,
+            "iterations": 1000,
+            "onlyDynamicEdges": false,
+            "updateInterval": 50
+        }
+    }
+};
+
+                  
+
+
+                  
+
+                  network = new vis.Network(container, data, options);
+
+                  
+
+                  
+
+                  
+
+
+                  
+
+                  return network;
+
+              }
+              drawGraph();
+        </script>
+    </body>
+</html>

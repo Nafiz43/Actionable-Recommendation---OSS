@@ -1,9 +1,0 @@
-Actionable,Actionable_Title,Features,Features_Title,Edges
-a1,Doing Code Revision,num_act_dev,The number of Active Developers is the count of contributors who have been active by either making commits or participating in discussions,No. of reference: 1
-a2,Providing access of the main repository to the newcomer,num_act_dev,The number of Active Developers is the count of contributors who have been active by either making commits or participating in discussions,No. of reference: 1
-a3,Providing Job Support to the newcomer,num_act_dev,The number of Active Developers is the count of contributors who have been active by either making commits or participating in discussions,No. of reference: 1
-a4,Maintaining project small or simple,num_act_dev,The number of Active Developers is the count of contributors who have been active by either making commits or participating in discussions,No. of reference: 1
-a5,Having Open Source Licence,num_act_dev,The number of Active Developers is the count of contributors who have been active by either making commits or participating in discussions,No. of reference: 1
-a6,Pay the contributor,num_emails,"It is the number of emails (including both thread starter emails and reply-to emails).
-",No. of reference: 2
-a6,Pay the contributor,num_act_dev,The number of Active Developers is the count of contributors who have been active by either making commits or participating in discussions,No. of reference: 3

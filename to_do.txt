@@ -5,4 +5,4 @@ Comments from All-Hands Meeting:
 3. How can we measure the impact of the ReACTs in real OSS Projects
 
 
-Need to find different ways to show the graphsa
+Need to find different ways to show the graphs
